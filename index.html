@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>🤖 Agent Dashboard</h1>
+    </div>
+    <div class="header-right">
+      <span id="connection-status" class="status-badge status-healthy">● Connected</span>
+      <span id="clock"></span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Summary Cards -->
+    <section class="summary-cards">
+      <div class="card">
+        <div class="card-label">Active Agents</div>
+        <div class="card-value" id="active-agents">0</div>
+        <div class="card-sub" id="total-agents">of 0 total</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Total Requests</div>
+        <div class="card-value" id="total-requests">0</div>
+        <div class="card-sub" id="requests-rate">0/min</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Avg Response</div>
+        <div class="card-value" id="avg-response">0ms</div>
+        <div class="card-sub" id="p99-response">p99: 0ms</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Error Rate</div>
+        <div class="card-value" id="error-rate">0%</div>
+        <div class="card-sub" id="error-count">0 errors</div>
+      </div>
+    </section>
+
+    <!-- Agent Grid -->
+    <section class="agent-section">
+      <h2>Agent Status</h2>
+      <div class="agent-grid" id="agent-grid"></div>
+    </section>
+
+    <!-- Charts -->
+    <section class="charts-section">
+      <div class="chart-container">
+        <h3>Request Volume (last 60s)</h3>
+        <canvas id="request-chart" width="600" height="200"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Response Time (last 60s)</h3>
+        <canvas id="response-chart" width="600" height="200"></canvas>
+      </div>
+    </section>
+
+    <!-- Activity Log -->
+    <section class="log-section">
+      <h2>Activity Log</h2>
+      <div class="log-controls">
+        <button onclick="clearLog()" class="btn btn-secondary">Clear</button>
+        <select id="log-filter" onchange="filterLog()">
+          <option value="all">All Events</option>
+          <option value="error">Errors Only</option>
+          <option value="warning">Warnings</option>
+          <option value="info">Info</option>
+        </select>
+      </div>
+      <div class="log-container" id="activity-log"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Agent Dashboard v0.1.0 — Refresh rate: <span id="refresh-rate">1s</span></p>
+  </footer>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
